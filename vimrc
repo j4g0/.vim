@@ -1,6 +1,6 @@
 set nocompatible              " be iMproved, required
 filetype plugin on            " required
-syntax enable
+syntax on
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -19,10 +19,10 @@ Plugin 'mattn/emmet-vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'MarcWeber/vim-addon-mw-utils'
 Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
 Plugin 'junegunn/fzf'
-Plugin 'honza/vim-snippets'
 Plugin 'vim-airline/vim-airline'
+Plugin 'sheerun/vim-polyglot'
+Plugin 'garbas/vim-snipmate'
 
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -91,6 +91,12 @@ nnoremap <leader>nt :NERDTree<cr>
 inoremap <C-k> <Esc>/<++><CR>"_c4l
 
 nnoremap ,html :-1read $HOME/.vim/snippets/html/skel.html<CR>5jcit
+
+"Set syntax on blade files
+augroup blade
+  autocmd!
+  autocmd BufNewFile,BufRead *.blade.php set filetype=blade
+augroup END
 
 "Map shift to esc in vim
 au VimEnter * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
