@@ -23,6 +23,7 @@ Plugin 'junegunn/fzf'
 Plugin 'vim-airline/vim-airline'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'garbas/vim-snipmate'
+Plugin 'Quramy/tsuquyomi'
 
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -92,10 +93,25 @@ inoremap <C-k> <Esc>/<++><CR>"_c4l
 
 nnoremap ,html :-1read $HOME/.vim/snippets/html/skel.html<CR>5jcit
 
+" Simplify vim split navigation
+nnoremap <c-j> <c-w>j
+nnoremap <c-k> <c-w>k
+nnoremap <c-h> <c-w>h
+nnoremap <c-l> <c-w>l
+
+" Pastetoggle on F2
+set pastetoggle=<F2>
+
 "Set syntax on blade files
 augroup blade
   autocmd!
   autocmd BufNewFile,BufRead *.blade.php set filetype=blade
+augroup END
+
+"Set syntax on typescript files
+augroup typescript
+  autocmd!
+  autocmd BufNewFile,BufRead *.ts set filetype=typescript
 augroup END
 
 "Map shift to esc in vim
