@@ -114,6 +114,13 @@ augroup typescript
   autocmd BufNewFile,BufRead *.ts set filetype=typescript
 augroup END
 
+"Set syntax on handlebar files
+augroup typescript
+  autocmd!
+  autocmd BufNewFile,BufRead *.handlebars set filetype=handlebars
+  autocmd BufNewFile,BufRead *.handlebars set syntax=html
+augroup END
+
 "Map shift to esc in vim
 au VimEnter * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Escape'
 au VimLeave * !xmodmap -e 'clear Lock' -e 'keycode 0x42 = Caps_Lock'
