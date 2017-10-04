@@ -91,7 +91,8 @@ nnoremap <leader>rv :source $MYVIMRC<CR>
 nnoremap <leader>nt :NERDTree<cr>
 inoremap <C-k> <Esc>/<++><CR>"_c4l
 
-nnoremap ,html :-1read $HOME/.vim/snippets/html/skel.html<CR>5jcit
+nnoremap ,html :-1read $HOME/.vim/snippets/html/skel.html<CR>7jcit
+inoremap ;; <Esc>A;<Esc>
 
 " Simplify vim split navigation
 nnoremap <c-j> <c-w>j
@@ -115,7 +116,7 @@ augroup typescript
 augroup END
 
 "Set syntax on handlebar files
-augroup typescript
+augroup handlebars
   autocmd!
   autocmd BufNewFile,BufRead *.handlebars set filetype=handlebars
   autocmd BufNewFile,BufRead *.handlebars set syntax=html
