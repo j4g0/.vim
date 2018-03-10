@@ -1,3 +1,12 @@
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                                                                              "
+"                               vimrc by j4g0                                  " 
+"                                                                              "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               VUNDLE SETTINGS                                " 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set nocompatible              " be iMproved, required
 filetype plugin on            " required
 syntax on
@@ -35,16 +44,31 @@ filetype plugin indent on    " required
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 
-"General Settings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               GENERAL SETTINGS                               " 
+"       Check :option-list or :options for a complete list of options          "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set relativenumber	"Show relative line number
-set number		"Show absolute line number
-set tabstop=2		"Show existing tab with 2 spaces
-set shiftwidth=2	"when indenting with '>' use 2 spaces
-set expandtab		"On pressing tab, insert 2 spaces
+set number		      "Show absolute line number
+set tabstop=2		    "Show existing tab with 2 spaces
+set shiftwidth=2	  "when indenting with '>' use 2 spaces
+set expandtab		    "On pressing tab, insert 2 spaces
 set laststatus=2
 set ttimeoutlen=50
+set incsearch       "incremental search
+set nohlsearch      "highlight search"
+set history=1000    "command history"
+set ruler           "show cursor position"
+set showcmd         "show incomplete commands"
+set scrolloff=10    
+set noautoindent    "auto indentation after line break"
+set nosmartindent   "smart indent"
+set hidden          "all buffers are hidden"
+colorscheme monokai-phoenix	"Set colorscheme
 
-" FINDING FILES
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                              FINDING FILES                                   "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Search down into subfolders
 " Provides tab-completition for all file-related tasks
@@ -58,7 +82,9 @@ set wildmenu
 " - Use * to make it fuzzy
 
 
-" TAG JUMPING
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                              TAG JUMPING                                     "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " create the 'tags' file
 command! MakeTags !ctags -R .
@@ -69,7 +95,9 @@ command! MakeTags !ctags -R .
 " - Use ^t to jump back up the tag stack
 
 
-"AUTOCOMPLETE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                              AUTOCOMPLETE                                    "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " The good stuff is documented in |ins-completition|
 
@@ -82,16 +110,27 @@ command! MakeTags !ctags -R .
 " ALLOWS TO
 " - Use ^n and ^p to go back and forth in the suggestion list
 
-colorscheme monokai-phoenix	"Set colorscheme
 
-" MAPPINGS
-let mapleader = "\<Space>"
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                              MAPPINGS                                        "
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader = "\<Space>"    "set leader key
 
+"set key to reload vimrc
 nnoremap <leader>rv :source $MYVIMRC<CR>    
+
+"set key to start NERDTree
 nnoremap <leader>nt :NERDTree<cr>
+
+"set key to change at the custom <++> placeholder
 inoremap <C-k> <Esc>/<++><CR>"_c4l
 
-nnoremap ,html :-1read $HOME/.vim/snippets/html/skel.html<CR>7jcit
+"set key to insert html snippet from file
+nnoremap ,html :-1read $HOME/.vim/snippets/html/skel.html<CR>7jcit;
+
+" Inster Shell header outdated due to auto load
+" nnoremap ,shell :-1read $HOME/.vim/snippets/shell/shell_header<CR>4jw
+
 inoremap ;; <Esc>A;<Esc>
 
 " Simplify vim split navigation
@@ -120,6 +159,16 @@ augroup handlebars
   autocmd!
   autocmd BufNewFile,BufRead *.handlebars set filetype=handlebars
   autocmd BufNewFile,BufRead *.handlebars set syntax=html
+augroup END
+
+"Auto insert and update header to shell scripts
+augroup shell
+  autocmd BufNewFile *.sh so $HOME/.vim/snippets/shell/shell_header
+  autocmd BufNewFile *.sh exe "1," . 10 . "g/File Name     :.*/s//File Name     : " .expand("%")
+  autocmd BufNewFile *.sh exe "1," . 10 . "g/Creation Date :.*/s//Creation Date : " .strftime("%d.%m.%Y")
+  autocmd BufWritePre,FileWritePre *.sh execute "normal ma"
+  autocmd BufWritePre,FileWritePre *.sh exe "1," . 10 . "g/Last Modified :.*/s/Last Modified :.*/Last Modified : " .strftime("%c")
+  autocmd BufWritePre,FileWritePre *.sh execute "normal `a"
 augroup END
 
 "Map shift to esc in vim
