@@ -1,12 +1,11 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                                                                              "
-"                               vimrc by j4g0                                  " 
-"                                                                              "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                               vimrc by j4g0
+"-------------------------------------------------------------------------------
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                               VUNDLE SETTINGS                                " 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+
+"                              VUNDLE SETTINGS
+"-------------------------------------------------------------------------------
+
 set nocompatible              " be iMproved, required
 filetype plugin on            " required
 syntax on
@@ -33,6 +32,8 @@ Plugin 'vim-airline/vim-airline'
 Plugin 'sheerun/vim-polyglot'
 Plugin 'garbas/vim-snipmate'
 Plugin 'Quramy/tsuquyomi'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'ternjs/tern_for_vim'
 
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -44,17 +45,17 @@ filetype plugin indent on    " required
 " :PluginSearch foo - searches for foo; append `!` to refresh local cache
 " :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                               GENERAL SETTINGS                               " 
-"       Check :option-list or :options for a complete list of options          "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"                              GENERAL SETTINGS
+"       Check :option-list or :options for a complete list of options
+"-------------------------------------------------------------------------------
 set relativenumber	"Show relative line number
 set number		      "Show absolute line number
 set tabstop=2		    "Show existing tab with 2 spaces
 set shiftwidth=2	  "when indenting with '>' use 2 spaces
 set expandtab		    "On pressing tab, insert 2 spaces
 set laststatus=2
-set ttimeoutlen=50
+"set timeoutlen=50
 set incsearch       "incremental search
 set nohlsearch      "highlight search"
 set history=1000    "command history"
@@ -66,9 +67,9 @@ set nosmartindent   "smart indent"
 set hidden          "all buffers are hidden"
 colorscheme monokai-phoenix	"Set colorscheme
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                              FINDING FILES                                   "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+"                               FINDING FILES
+"-------------------------------------------------------------------------------
 
 " Search down into subfolders
 " Provides tab-completition for all file-related tasks
@@ -82,10 +83,8 @@ set wildmenu
 " - Use * to make it fuzzy
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                              TAG JUMPING                                     "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+"                                TAG JUMPING
+"-------------------------------------------------------------------------------
 " create the 'tags' file
 command! MakeTags !ctags -R .
 
@@ -95,10 +94,8 @@ command! MakeTags !ctags -R .
 " - Use ^t to jump back up the tag stack
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                              AUTOCOMPLETE                                    "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
+"                                AUTOCOMPLETE
+"-------------------------------------------------------------------------------
 " The good stuff is documented in |ins-completition|
 
 " HIGHLIGHTS
@@ -111,9 +108,19 @@ command! MakeTags !ctags -R .
 " - Use ^n and ^p to go back and forth in the suggestion list
 
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"                              MAPPINGS                                        "
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"                           YouCompleteMe Settings
+"-------------------------------------------------------------------------------
+" Start autocompletition after 4 chars
+let g:ycm_min_num_of_chars_for_completition = 4
+let g:ycm_min_num_identifier_candidate_chars = 4
+let g:ycm_enable_diagnostic_highlighting = 0
+
+" Don't show YCM's preview window
+set completeopt-=preview
+let g:ycm_add_preview_to_completeopt = 0
+
+"                                  MAPPINGS
+"-------------------------------------------------------------------------------
 let mapleader = "\<Space>"    "set leader key
 
 "set key to reload vimrc
@@ -127,6 +134,9 @@ inoremap <C-k> <Esc>/<++><CR>"_c4l
 
 "set key to insert html snippet from file
 nnoremap ,html :-1read $HOME/.vim/snippets/html/skel.html<CR>7jcit;
+
+nnoremap ,php a<?php ?><Esc>bbea<Space>
+
 
 " Inster Shell header outdated due to auto load
 " nnoremap ,shell :-1read $HOME/.vim/snippets/shell/shell_header<CR>4jw
@@ -142,10 +152,19 @@ nnoremap <c-l> <c-w>l
 " Pastetoggle on F2
 set pastetoggle=<F2>
 
+" Emmet Keybindings
+let g:user_emmet_leader_key = '<c-e>'
+
 "Set syntax on blade files
 augroup blade
   autocmd!
   autocmd BufNewFile,BufRead *.blade.php set filetype=blade
+augroup END
+
+"Set syntax on vue files
+augroup vue
+  autocmd!
+  autocmd BufNewFile,BufRead *.vue set filetype=vue
 augroup END
 
 "Set syntax on typescript files
