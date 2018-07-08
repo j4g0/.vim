@@ -1,1 +1,1 @@
-VIM & VIMRC
+VIMRC & Snippets
