@@ -21,7 +21,8 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-surround'
-Plugin 'Reewr/vim-monokai-phoenix'
+"Plugin 'Reewr/vim-monokai-phoenix'
+Plugin 'lifepillar/vim-solarized8'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'mattn/emmet-vim'
 Plugin 'scrooloose/nerdtree'
@@ -34,6 +35,8 @@ Plugin 'garbas/vim-snipmate'
 Plugin 'Quramy/tsuquyomi'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'ternjs/tern_for_vim'
+Plugin 'ap/vim-css-color'
+Bundle 'captbaritone/better-indent-support-for-php-with-html'
 
 "All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -65,7 +68,10 @@ set scrolloff=10
 set noautoindent    "auto indentation after line break"
 set nosmartindent   "smart indent"
 set hidden          "all buffers are hidden"
-colorscheme monokai-phoenix	"Set colorscheme
+set termguicolors   "24bit true color - requires vim vers.8
+set background=dark "Prequesite for Solarized dark
+colorscheme solarized8
+"colorscheme monokai-phoenix	"Set colorscheme
 
 
 "                               FINDING FILES
@@ -133,10 +139,13 @@ nnoremap <leader>nt :NERDTree<cr>
 inoremap <C-k> <Esc>/<++><CR>"_c4l
 
 "set key to insert html snippet from file
-nnoremap ,html :-1read $HOME/.vim/snippets/html/skel.html<CR>7jcit;
+nnoremap ,html :-1read $HOME/.vim/snippets/html/skel.html<CR>7jcit
 
+"set key to insert php script tags
 nnoremap ,php a<?php ?><Esc>bbea<Space>
 
+"set key to insert VueComponent snippet
+nnoremap ,vue :-1read $HOME/.vim/snippets/vue/VueComponent.vue<CR>6jf'a
 
 " Inster Shell header outdated due to auto load
 " nnoremap ,shell :-1read $HOME/.vim/snippets/shell/shell_header<CR>4jw
