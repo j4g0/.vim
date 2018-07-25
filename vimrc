@@ -147,9 +147,10 @@ nnoremap ,php a<?php ?><Esc>bbea<Space>
 "set key to insert VueComponent snippet
 nnoremap ,vue :-1read $HOME/.vim/snippets/vue/VueComponent.vue<CR>6jf'a
 
-" Inster Shell header outdated due to auto load
+" Insert Shell header outdated due to auto load
 " nnoremap ,shell :-1read $HOME/.vim/snippets/shell/shell_header<CR>4jw
 
+" Insert Mode: ";;" appends ";" to end of line & exits Insert Mode
 inoremap ;; <Esc>A;<Esc>
 
 " Simplify vim split navigation
