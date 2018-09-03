@@ -144,6 +144,9 @@ nnoremap ,html :-1read $HOME/.vim/snippets/html/skel.html<CR>7jcit
 "set key to insert php script tags
 nnoremap ,php a<?php ?><Esc>bbea<Space>
 
+"set key to insert php echo shortcut
+nnoremap ,echo a<?= ?><Esc>bbea<Space>
+
 "set key to insert VueComponent snippet
 nnoremap ,vue :-1read $HOME/.vim/snippets/vue/VueComponent.vue<CR>6jf'a
 
@@ -158,6 +161,9 @@ nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
+
+" Find PHP syntax errors in current file
+nnoremap <F3> :!php -l %<CR>
 
 " Pastetoggle on F2
 set pastetoggle=<F2>
